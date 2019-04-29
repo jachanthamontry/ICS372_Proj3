@@ -13,8 +13,5 @@ public class ACButton extends GUIButton implements EventHandler<ActionEvent>{
 	@Override
 	public void handle(ActionEvent event) {
 		ThermometerContext.instance().handleEvent();
-		
-		
-		
 	}
 }
