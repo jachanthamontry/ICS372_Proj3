@@ -11,8 +11,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import states.ThermometerContext;
 
-public class GUIDisplay extends Application implements ThermometerDisplay, EventHandler<ActionEvent> {
+public class GUIDisplay extends Application implements ThermometerDisplay {
 
 	private Button heaterButton = new Button("Heater");
     private Button acButton = new Button("AC");
@@ -28,6 +29,9 @@ public class GUIDisplay extends Application implements ThermometerDisplay, Event
     private Text noDeviceLabel = new Text("No Device is on");
     private TextField tempEntryField = new TextField();
     GridPane userInterfaceGrid = new GridPane();
+    private static ThermometerDisplay display;
+    private ThermometerContext thermometerContext;
+    
     
     public static ThermometerDisplay getInstance() {
     	return display;
@@ -55,7 +59,7 @@ public class GUIDisplay extends Application implements ThermometerDisplay, Event
         userInterfaceGrid.add(noDeviceLabel, 3, 2);
         
 		Scene scene = new Scene(userInterfaceGrid);
-		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 		
 		
 		//this is able to work and does something
@@ -98,24 +102,5 @@ public class GUIDisplay extends Application implements ThermometerDisplay, Event
 	}
 
 	
-	//haven't foudn out how to use this yet
-	@Override
-	public void handle(ActionEvent event) {
-		
-		if(event.getSource().equals(heaterButton)) {
-			System.out.println("moo");
-			currentTempLabel.setText("blah");
-		}
-		else {
-			System.out.println("baa");
-		}
-		
-		
-	/*	public void handle(ActionEvent event){
-			if(event.getSource().equals(doorCloser)){
-				microwave.doorClosed();
-			}else if(event.getSource().equals(doorOpener)){
-				microwave.doorOpened(); */
-	}
 
 }
