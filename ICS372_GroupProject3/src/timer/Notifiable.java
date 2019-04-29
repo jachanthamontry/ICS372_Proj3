@@ -1,7 +1,7 @@
 package timer;
 
-import events.TimerRanOutEvent;
-import events.TimerTickedEvent;
+import events.SelectFanEvent;
+import events.TimerEnds;
 
 /**
  * An entity that can be notified of timing events
