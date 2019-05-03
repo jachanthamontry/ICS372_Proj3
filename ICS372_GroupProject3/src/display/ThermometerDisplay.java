@@ -4,11 +4,24 @@ public interface ThermometerDisplay {
 
 	public void showCurrentTemp(int value);
 	
-	public void showDesiredTemp();
+	public void showDesiredTemp(int value);
 	
-	public void showOutsideTemp();
+	public void showOutsideTemp(int value);
 	
-	public void showDevice();
+	public void showNoDevice();
+	
+	public void showFanIdle();
+	
+	public void showFanOn();
+	
+	public void showACIdle();
+	
+	public void showACOn();
+	
+	public void showHeaterIdle();
+	
+	public void showHeaterOn();
+	
 }
 	
 	

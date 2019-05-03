@@ -1,10 +1,17 @@
 package states;
 
 import display.ThermometerDisplay;
+import events.SelectACEvent;
+import events.SelectFanEvent;
+import events.SelectHeatEvent;
+import events.SelectOffEvent;
+import events.TemperatureHitsDesiredTemperatureEvent;
+import events.TemperatureLeavesThresholdEvent;
+import events.TimerEnds;
 
 public class ThermometerContext {
 	private ThermometerDisplay display;
-	//private State thign currentState;
+	private ThermometerState currentState;
 	private static ThermometerContext instance;
 	
 	
@@ -13,7 +20,7 @@ public class ThermometerContext {
      */
     private ThermometerContext() {
         instance = this;
-        //currentState = DoorClosedState.instance();
+        //currentState = OffState.instance();
     }
     
     /**
@@ -37,4 +44,78 @@ public class ThermometerContext {
     public void setDisplay(ThermometerDisplay display) {
         this.display = display;
     }
+
+    public void initialize() {
+        //instance.changeState(OffState.instance());
+    }
+    
+    public void changeState(ThermometerState nextState) {
+        currentState.leave();
+        currentState = nextState;
+        currentState.enter();
+    }
+
+    public void handleEvent(SelectOffEvent event) {
+    	currentState.handleEvent(event);
+    }
+    public void handleEvent(SelectACEvent event) {
+        currentState.handleEvent(event);
+    }
+    
+    public void handleEvent(SelectFanEvent event) {
+        currentState.handleEvent(event);
+    }
+
+    public void handleEvent(SelectHeatEvent event) {
+        currentState.handleEvent(event);
+    }
+
+    public void handleEvent(TemperatureHitsDesiredTemperatureEvent event) {
+        currentState.handleEvent(event);
+    }
+
+    public void handleEvent(TemperatureLeavesThresholdEvent event) {
+        currentState.handleEvent(event);
+    }
+
+	public void showCurrentTemp(int value) {
+		display.showCurrentTemp(value);
+	}
+	
+	public void showDesiredTemp(int value) {
+		display.showDesiredTemp(value);
+	}
+	
+	public void showOutsideTemp(int value) {
+		display.showOutsideTemp(value);
+	}
+	
+	public void showNoDevice() {
+		display.showNoDevice();
+	}
+	
+	public void showFanIdle() {
+		display.showFanIdle();
+	}
+	
+	public void showFanOn() {
+		display.showFanOn();
+	}
+	
+	public void showACIdle() {
+		display.showACIdle();
+	}
+	
+	public void showACOn() {
+		display.showACOn();
+	}
+	
+	public void showHeaterIdle() {
+		display.showHeaterIdle();
+	}
+	
+	public void showHeaterOn() {
+		display.showHeaterIdle();
+	}
+	
 }

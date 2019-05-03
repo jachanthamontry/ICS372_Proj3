@@ -95,29 +95,62 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
 	
 	@Override
 	public void showCurrentTemp(int value) {
-		// TODO Auto-generated method stub
 		currentTempLabel.setText("Current Temp " + value);
 		System.out.println("moo");
 	}
-
-	@Override
-	public void showDesiredTemp() {
-		// TODO Auto-generated method stub
-		System.out.println("moo");
-	}
-
-	@Override
-	public void showOutsideTemp() {
-		// TODO Auto-generated method stub
-		System.out.println("moo");
-	}
-
-	@Override
-	public void showDevice() {
-		// TODO Auto-generated method stub
-		System.out.println("moo");
-	}
-
 	
-
+	@Override
+	public void showDesiredTemp(int value) {
+		desiredTempLabel.setText("Desired Temp " + value);
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showOutsideTemp(int value) {
+		outsideTempLabel.setText("Outside Temp " + value);
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showNoDevice() {
+		currentTempLabel.setText("No Device is on");
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showFanIdle() {
+		currentTempLabel.setText("Fan is idling");
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showFanOn() {
+		currentTempLabel.setText("Fan is working");
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showACIdle() {
+		currentTempLabel.setText("AC is idling");
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showACOn() {
+		currentTempLabel.setText("AC is on");
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showHeaterIdle() {
+		currentTempLabel.setText("Heater is idling");
+		System.out.println("moo");
+	}
+	
+	@Override
+	public void showHeaterOn() {
+		currentTempLabel.setText("Heater is on");
+		System.out.println("moo");
+	}
+	
 }
