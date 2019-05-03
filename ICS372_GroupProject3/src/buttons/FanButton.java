@@ -12,6 +12,7 @@ public class FanButton extends GUIButton implements EventHandler<ActionEvent>{
 	
 	@Override
 	public void handle(ActionEvent event) {
-		ThermometerContext.instance().handleEvent();
+		//ThermometerContext.instance().handleEvent();
+		System.out.println("moo");
 	}
 }

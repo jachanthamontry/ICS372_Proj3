@@ -12,6 +12,7 @@ public class SetDesiredRoomTempButton extends GUIButton implements EventHandler<
 	
 	@Override
 	public void handle(ActionEvent event) {
-		ThermometerContext.instance().handleEvent();
+		//ThermometerContext.instance().handleEvent();
+		System.out.println("bork");
 	}
 }

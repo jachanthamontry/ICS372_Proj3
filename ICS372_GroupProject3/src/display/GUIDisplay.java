@@ -3,6 +3,7 @@ package display;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,16 +13,26 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import states.ThermometerContext;
+import buttons.ACButton;
+import buttons.FanButton;
+import buttons.GUIButton;
+import buttons.HeaterButton;
+import buttons.SetCurrentRoomTempButton;
+import buttons.SetDesiredRoomTempButton;
+import buttons.SetOutsideTempButton;
+import buttons.NoDeviceButton;
+
+
 
 public class GUIDisplay extends Application implements ThermometerDisplay {
 
-	private Button heaterButton = new Button("Heater");
-    private Button acButton = new Button("AC");
-    private Button fanButton = new Button("Fan");
-    private Button noDeviceButton = new Button("No Device");
-    private Button setCurrentButton = new Button("Set Current Room Temp");
-    private Button setOutsideButton = new Button("Set Outside Temp");
-    private Button setDesiredButton = new Button("Set Desired Room Temp");
+	private GUIButton heaterButton;
+	private GUIButton acButton;
+	private GUIButton fanButton;
+	private GUIButton noDeviceButton;
+	private GUIButton setOutsideTempButton;
+	private GUIButton setDesiredTempButton;
+	private GUIButton setCurrentRoomTempButton;
     private Text temperatureLabel = new Text("Temperature");
     private Text currentTempLabel = new Text("Current Temp ");
     private Text desiredTempLabel = new Text("Desired Temp ");
@@ -32,42 +43,46 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
     private static ThermometerDisplay display;
     private ThermometerContext thermometerContext;
     
-    
     public static ThermometerDisplay getInstance() {
     	return display;
     }
     
     @Override
     public void start(Stage primaryStage) {
-    	userInterfaceGrid.setHgap(10); //horizontal gap in pixels => that's what you are asking for
-		userInterfaceGrid.setVgap(10); //vertical gap in pixels
-		
-		userInterfaceGrid.add(temperatureLabel, 0, 0);
-		userInterfaceGrid.add(tempEntryField, 1, 0);
-		userInterfaceGrid.add(setCurrentButton, 2, 0);
-		userInterfaceGrid.add(setOutsideButton, 3, 0);
-		userInterfaceGrid.add(setDesiredButton, 4, 0);
-        
-        userInterfaceGrid.add(heaterButton, 0, 1);
-        userInterfaceGrid.add(acButton, 1, 1);
-        userInterfaceGrid.add(fanButton, 2, 1);
-        userInterfaceGrid.add(noDeviceButton, 3, 1);
-      
-        userInterfaceGrid.add(currentTempLabel, 0, 2);
-        userInterfaceGrid.add(desiredTempLabel, 1, 2);
-        userInterfaceGrid.add(outsideTempLabel, 2, 2);
-        userInterfaceGrid.add(noDeviceLabel, 3, 2);
-        
-		Scene scene = new Scene(userInterfaceGrid);
-		//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		
-		
-		//this is able to work and does something
-		heaterButton.setOnAction(value -> {
-			System.out.println("hi im james");
-		});
-		
-		primaryStage.setScene(scene);
+    	thermometerContext = ThermometerContext.instance();
+    	thermometerContext.setDisplay(this);
+    	display = this;
+    	heaterButton = new HeaterButton("Heater");
+    	acButton = new ACButton("AC");
+    	fanButton = new FanButton("Fan");
+    	noDeviceButton = new NoDeviceButton("No Device");
+    	setOutsideTempButton = new SetOutsideTempButton("Set Outside Temp");
+    	setDesiredTempButton = new SetDesiredRoomTempButton("Set Desired Room Temp");
+    	setCurrentRoomTempButton = new SetCurrentRoomTempButton("Set Current Room Temp");
+    	
+    	GridPane pane = new GridPane();
+    	pane.setHgap(10);
+    	pane.setVgap(10);
+    	pane.setPadding(new Insets(10, 10, 10, 10));
+    	pane.add(temperatureLabel, 0, 0);
+    	pane.add(tempEntryField, 1, 0);
+    	pane.add(setCurrentRoomTempButton, 2, 0);
+    	pane.add(setOutsideTempButton, 3, 0);
+    	pane.add(setDesiredTempButton, 4, 0);
+    	pane.add(heaterButton, 0, 1);
+    	pane.add(acButton, 1, 1);
+    	pane.add(fanButton, 2, 1);
+    	pane.add(noDeviceButton, 3, 1);
+    	pane.add(currentTempLabel, 0, 2);
+    	pane.add(desiredTempLabel, 1, 2);
+    	pane.add(outsideTempLabel, 2, 2);
+    	pane.add(noDeviceLabel, 3, 2);
+    	
+    	
+    	
+    	Scene scene = new Scene(pane);
+    
+    	primaryStage.setScene(scene);
 		primaryStage.setTitle("Group Project 3");
 		primaryStage.show();
     }
