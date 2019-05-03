@@ -12,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import states.ThermometerContext;
 import buttons.ACButton;
 import buttons.FanButton;
@@ -85,6 +86,12 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
     	primaryStage.setScene(scene);
 		primaryStage.setTitle("Group Project 3");
 		primaryStage.show();
+		primaryStage.addEventHandler(WindowEvent.WINDOW_CLOSE_REQUEST, new EventHandler<WindowEvent>() {
+			@Override
+	        public void handle(WindowEvent window) {
+				System.exit(0);
+			}
+	    });
     }
     
 	public static void main(String[] args) {
