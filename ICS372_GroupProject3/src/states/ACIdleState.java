@@ -4,6 +4,9 @@ import events.SelectOffEvent;
 import events.SelectFanEvent;
 import events.SelectHeatEvent;
 import events.TemperatureLeavesThresholdEvent;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
 
 public class ACIdleState extends ThermometerState {
 	private static ACIdleState instance;

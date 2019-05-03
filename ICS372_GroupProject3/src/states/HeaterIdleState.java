@@ -4,6 +4,9 @@ import events.SelectOffEvent;
 import events.SelectACEvent;
 import events.SelectFanEvent;
 import events.TemperatureLeavesThresholdEvent;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
 
 public class HeaterIdleState extends ThermometerState {
 	private static HeaterIdleState instance;

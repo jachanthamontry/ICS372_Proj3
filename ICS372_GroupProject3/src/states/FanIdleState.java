@@ -4,6 +4,9 @@ import events.SelectOffEvent;
 import events.SelectACEvent;
 import events.SelectHeatEvent;
 import events.TimerEnds;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
 
 public class FanIdleState extends ThermometerState {
 	private static FanIdleState instance;

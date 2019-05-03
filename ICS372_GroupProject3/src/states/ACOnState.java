@@ -4,6 +4,9 @@ import events.SelectOffEvent;
 import events.SelectFanEvent;
 import events.SelectHeatEvent;
 import events.TemperatureHitsDesiredTemperatureEvent;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
 
 public class ACOnState extends ThermometerState {
 	private static ACOnState instance;

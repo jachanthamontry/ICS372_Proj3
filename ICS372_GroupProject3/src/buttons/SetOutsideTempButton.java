@@ -1,5 +1,6 @@
 package buttons;
 
+import events.SettingOutsideTemperature;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import states.ThermometerContext;
@@ -12,6 +13,6 @@ public class SetOutsideTempButton extends GUIButton implements EventHandler<Acti
 	
 	@Override
 	public void handle(ActionEvent event) {
-		//ThermometerContext.instance().handleEvent();
+		ThermometerContext.instance().handleEvent(SettingOutsideTemperature.instance());
 	}
 }

@@ -7,6 +7,10 @@ import events.SelectOffEvent;
 import events.TemperatureHitsDesiredTemperatureEvent;
 import events.TemperatureLeavesThresholdEvent;
 import events.TimerEnds;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
+
 
 public abstract class ThermometerState{
 
@@ -46,5 +50,17 @@ public abstract class ThermometerState{
 
     public void handleEvent(TimerEnds event) {
 
+    }
+    
+    public void handleEvent(SettingCurrentTemperature event) {
+    	
+    }
+    
+    public void handleEvent(SettingDesiredTemperature event) {
+    	
+    }
+    
+    public void handleEvent(SettingOutsideTemperature event) {
+    	
     }
 }
