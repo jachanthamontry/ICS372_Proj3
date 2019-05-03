@@ -1,14 +1,10 @@
 package display;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -27,6 +23,7 @@ import buttons.NoDeviceButton;
 
 public class GUIDisplay extends Application implements ThermometerDisplay {
 
+	private int currentTemp = 0;
 	private GUIButton heaterButton;
 	private GUIButton acButton;
 	private GUIButton fanButton;
@@ -35,9 +32,9 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
 	private GUIButton setDesiredTempButton;
 	private GUIButton setCurrentRoomTempButton;
     private Text temperatureLabel = new Text("Temperature");
-    private Text currentTempLabel = new Text("Current Temp ");
-    private Text desiredTempLabel = new Text("Desired Temp ");
-    private Text outsideTempLabel = new Text("Outside Temp ");
+    private Text currentTempLabel = new Text("Current Temp 0");
+    private Text desiredTempLabel = new Text("Desired Temp 0");
+    private Text outsideTempLabel = new Text("Outside Temp 0");
     private Text noDeviceLabel = new Text("No Device is on");
     private TextField tempEntryField = new TextField();
     GridPane userInterfaceGrid = new GridPane();
@@ -77,9 +74,7 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
     	pane.add(currentTempLabel, 0, 2);
     	pane.add(desiredTempLabel, 1, 2);
     	pane.add(outsideTempLabel, 2, 2);
-    	pane.add(noDeviceLabel, 3, 2);
-    	
-    	
+    	pane.add(noDeviceLabel, 3, 2);	
     	
     	Scene scene = new Scene(pane);
     
@@ -99,9 +94,9 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
 	}
 	
 	@Override
-	public void showCurrentTemp() {
+	public void showCurrentTemp(int value) {
 		// TODO Auto-generated method stub
-		
+		currentTempLabel.setText("Current Temp " + value);
 		System.out.println("moo");
 	}
 

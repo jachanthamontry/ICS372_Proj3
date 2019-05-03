@@ -2,7 +2,7 @@ package display;
 
 public interface ThermometerDisplay {
 
-	public void showCurrentTemp();
+	public void showCurrentTemp(int value);
 	
 	public void showDesiredTemp();
 	
