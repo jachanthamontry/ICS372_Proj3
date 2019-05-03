@@ -152,5 +152,9 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
 		deviceLabel.setText("Heater is on");
 		System.out.println("moo");
 	}
+	@Override
+	public String getEntryField() {
+		return tempEntryField.getText();
+	}
 	
 }

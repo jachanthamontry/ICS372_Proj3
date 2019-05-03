@@ -7,6 +7,9 @@ import events.SelectHeatEvent;
 import events.SelectOffEvent;
 import events.TemperatureHitsDesiredTemperatureEvent;
 import events.TemperatureLeavesThresholdEvent;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
 import events.TimerEnds;
 
 public class ThermometerContext {
@@ -36,7 +39,7 @@ public class ThermometerContext {
     }
     
     /**
-     * The display could change. So we have to get its refrence.
+     * The display could change. So we have to get its reference.
      * 
      * @param display
      *            The current display object
@@ -78,6 +81,23 @@ public class ThermometerContext {
     public void handleEvent(TemperatureLeavesThresholdEvent event) {
         currentState.handleEvent(event);
     }
+    
+    public void handleEvent(TimerEnds event) {
+        currentState.handleEvent(event);
+    }
+
+    public void handleEvent(SettingCurrentTemperature event) {
+        currentState.handleEvent(event);
+    }
+    
+    public void handleEvent(SettingDesiredTemperature event) {
+        currentState.handleEvent(event);
+    }
+    
+    public void handleEvent(SettingOutsideTemperature event) {
+        currentState.handleEvent(event);
+    	
+    }
 
 	public void showCurrentTemp(int value) {
 		display.showCurrentTemp(value);
@@ -117,6 +137,9 @@ public class ThermometerContext {
 	
 	public void showHeaterOn() {
 		display.showHeaterIdle();
+	}
+	public String getEntryField() {
+		return display.getEntryField();
 	}
 	
 }

@@ -22,6 +22,7 @@ public interface ThermometerDisplay {
 	
 	public void showHeaterOn();
 	
+	public String getEntryField();
 }
 	
 	

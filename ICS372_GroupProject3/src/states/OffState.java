@@ -3,9 +3,13 @@ package states;
 import events.SelectACEvent;
 import events.SelectHeatEvent;
 import events.SelectFanEvent;
+import events.SettingCurrentTemperature;
+import events.SettingDesiredTemperature;
+import events.SettingOutsideTemperature;
 
 public class OffState extends ThermometerState {
 	private static OffState instance;
+	private int temperatureValue;
 	
 	private OffState() {
 	}
@@ -29,6 +33,22 @@ public class OffState extends ThermometerState {
     
     @Override
     public void handleEvent(SelectFanEvent event) {
+        ThermometerContext.instance().changeState(FanIdleState.instance());
+    }
+
+    @Override
+    public void handleEvent(SettingCurrentTemperature event) {
+    	
+    	temperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+    	ThermometerContext.instance().showCurrentTemp(temperatureValue);
+    }
+    @Override
+    public void handleEvent(SettingDesiredTemperature event) {
+        ThermometerContext.instance().changeState(HeaterIdleState.instance());
+    }
+    
+    @Override
+    public void handleEvent(SettingOutsideTemperature event) {
         ThermometerContext.instance().changeState(FanIdleState.instance());
     }
 	
