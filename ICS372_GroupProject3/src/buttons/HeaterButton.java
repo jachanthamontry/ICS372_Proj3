@@ -1,5 +1,6 @@
 package buttons;
 
+import events.SelectHeatEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import states.ThermometerContext;
@@ -12,7 +13,6 @@ public class HeaterButton extends GUIButton implements EventHandler<ActionEvent>
 	
 	@Override
 	public void handle(ActionEvent event) {
-		//ThermometerContext.instance().handleEvent();
-		System.out.println("baa");
+		ThermometerContext.instance().handleEvent(SelectHeatEvent.instance());
 	}
 }

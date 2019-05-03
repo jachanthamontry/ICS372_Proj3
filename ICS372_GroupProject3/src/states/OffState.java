@@ -20,22 +20,16 @@ public class OffState extends ThermometerState {
 
     @Override
     public void handleEvent(SelectACEvent event) {
-        ThermometerContext.instance().changeState(SelectACEvent.instance());
+        ThermometerContext.instance().changeState(ACIdleState.instance());
     }
-
-    /**
-     * handle cook request
-     * 
-     */
-
     @Override
     public void handleEvent(SelectHeatEvent event) {
-        ThermometerContext.instance().changeState(SelectHeatEvent.instance());
+        ThermometerContext.instance().changeState(HeaterIdleState.instance());
     }
     
     @Override
     public void handleEvent(SelectFanEvent event) {
-        ThermometerContext.instance().changeState(SelectFanEvent.instance());
+        ThermometerContext.instance().changeState(FanIdleState.instance());
     }
 	
 	@Override

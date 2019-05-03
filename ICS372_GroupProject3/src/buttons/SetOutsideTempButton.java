@@ -13,6 +13,5 @@ public class SetOutsideTempButton extends GUIButton implements EventHandler<Acti
 	@Override
 	public void handle(ActionEvent event) {
 		//ThermometerContext.instance().handleEvent();
-		System.out.println("derp");
 	}
 }

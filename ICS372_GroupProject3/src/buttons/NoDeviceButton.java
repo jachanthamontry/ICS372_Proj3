@@ -1,5 +1,6 @@
 package buttons;
 
+import events.SelectOffEvent;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import states.ThermometerContext;
@@ -12,7 +13,6 @@ public class NoDeviceButton extends GUIButton implements EventHandler<ActionEven
 	
 	@Override
 	public void handle(ActionEvent event) {
-		//ThermometerContext.instance().handleEvent();
-		System.out.println("No");
+		ThermometerContext.instance().handleEvent(SelectOffEvent.instance());
 	}
 }

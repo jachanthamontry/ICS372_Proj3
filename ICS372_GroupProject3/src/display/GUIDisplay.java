@@ -35,7 +35,7 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
     private Text currentTempLabel = new Text("Current Temp 0");
     private Text desiredTempLabel = new Text("Desired Temp 0");
     private Text outsideTempLabel = new Text("Outside Temp 0");
-    private Text noDeviceLabel = new Text("No Device is on");
+    private Text deviceLabel = new Text("No Device is on");
     private TextField tempEntryField = new TextField();
     GridPane userInterfaceGrid = new GridPane();
     private static ThermometerDisplay display;
@@ -74,7 +74,7 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
     	pane.add(currentTempLabel, 0, 2);
     	pane.add(desiredTempLabel, 1, 2);
     	pane.add(outsideTempLabel, 2, 2);
-    	pane.add(noDeviceLabel, 3, 2);	
+    	pane.add(deviceLabel, 3, 2);	
     	
     	Scene scene = new Scene(pane);
     
@@ -113,43 +113,43 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
 	
 	@Override
 	public void showNoDevice() {
-		currentTempLabel.setText("No Device is on");
+		deviceLabel.setText("No Device is on");
 		System.out.println("moo");
 	}
 	
 	@Override
 	public void showFanIdle() {
-		currentTempLabel.setText("Fan is idling");
+		deviceLabel.setText("Fan is idling");
 		System.out.println("moo");
 	}
 	
 	@Override
 	public void showFanOn() {
-		currentTempLabel.setText("Fan is working");
+		deviceLabel.setText("Fan is working");
 		System.out.println("moo");
 	}
 	
 	@Override
 	public void showACIdle() {
-		currentTempLabel.setText("AC is idling");
+		deviceLabel.setText("AC is idling");
 		System.out.println("moo");
 	}
 	
 	@Override
 	public void showACOn() {
-		currentTempLabel.setText("AC is on");
+		deviceLabel.setText("AC is on");
 		System.out.println("moo");
 	}
 	
 	@Override
 	public void showHeaterIdle() {
-		currentTempLabel.setText("Heater is idling");
+		deviceLabel.setText("Heater is idling");
 		System.out.println("moo");
 	}
 	
 	@Override
 	public void showHeaterOn() {
-		currentTempLabel.setText("Heater is on");
+		deviceLabel.setText("Heater is on");
 		System.out.println("moo");
 	}
 	

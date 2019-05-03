@@ -20,7 +20,7 @@ public class ThermometerContext {
      */
     private ThermometerContext() {
         instance = this;
-        //currentState = OffState.instance();
+        currentState = OffState.instance();
     }
     
     /**
@@ -58,6 +58,7 @@ public class ThermometerContext {
     public void handleEvent(SelectOffEvent event) {
     	currentState.handleEvent(event);
     }
+    
     public void handleEvent(SelectACEvent event) {
         currentState.handleEvent(event);
     }
