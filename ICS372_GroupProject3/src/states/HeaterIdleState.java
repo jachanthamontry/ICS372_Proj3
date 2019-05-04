@@ -60,7 +60,7 @@ public class HeaterIdleState extends ThermometerState {
     
     public void handleEvent(TimerTickedEvent event) {
     	
-    	if(currentTemperatureValue < outsideTemperatureValue) {
+    	if(currentTemperatureValue <= outsideTemperatureValue) {
     		if(currentTemperatureValue <= desiredTemperatureValue - 3) {
     			ThermometerContext.instance().changeState(HeaterOnState.instance());
         	}

@@ -48,7 +48,7 @@ public class FanOnState extends ThermometerState implements Notifiable {
     public void handleEvent(TimerTickedEvent event) {
     	fantimer++;
     	
-    	if(fantimer == 5) {
+    	if(fantimer == 10) {
     		 ThermometerContext.instance().changeState(FanIdleState.instance());
     	}
     	
