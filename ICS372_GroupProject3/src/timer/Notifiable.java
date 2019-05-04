@@ -1,6 +1,7 @@
 package timer;
 
 import events.TimerEnds;
+import events.TimerTickedEvent;
 
 
 /**
@@ -10,7 +11,11 @@ import events.TimerEnds;
  *
  */
 public interface Notifiable {
-   
+    /**
+     * Process timer ticks
+     */
+    public void handleEvent(TimerTickedEvent event);
+    
     /**
      * Process timer runs out event
      */

@@ -11,12 +11,15 @@ import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
 import events.TimerEnds;
+import events.TimerTickedEvent;
+import timer.Timer;
+import timer.Notifiable;
 
-public class ThermometerContext {
+public class ThermometerContext implements Notifiable {
 	private ThermometerDisplay display;
 	private ThermometerState currentState;
 	private static ThermometerContext instance;
-	
+	private Timer timer;
 	
 	 /**
      * Make it a singleton
@@ -24,6 +27,7 @@ public class ThermometerContext {
     private ThermometerContext() {
         instance = this;
         currentState = OffState.instance();
+        timer = new Timer(this,100);
     }
     
     /**
@@ -49,7 +53,7 @@ public class ThermometerContext {
     }
 
     public void initialize() {
-        //instance.changeState(OffState.instance());
+        instance.changeState(OffState.instance());
     }
     
     public void changeState(ThermometerState nextState) {
@@ -98,6 +102,11 @@ public class ThermometerContext {
         currentState.handleEvent(event);
     	
     }
+    
+	public void handleEvent(TimerTickedEvent event) {
+		currentState.handleEvent(event);
+		
+	}
 
 	public void showCurrentTemp(int value) {
 		display.showCurrentTemp(value);
@@ -142,16 +151,20 @@ public class ThermometerContext {
 		return display.getEntryField();
 	}
 
-	public void temperatureIncrease(int currentTemp, int outsideTemp) {
-		while(currentTemp < outsideTemp) {
+	public int temperatureIncrease(int currentTemp, int outsideTemp) {
+		if(currentTemp < outsideTemp)
 			currentTemp++;
-			display.showCurrentTemp(currentTemp);
-			System.out.println(currentTemp);
-		}
+		System.out.println(currentTemp);
+		return currentTemp;
 	}
 
-	public void temperatureDecrease(int currentTemp, int desiredTemp, int outsideTemp) {
-		
+	public int temperatureDecrease(int currentTemp, int outsideTemp) {
+		if(currentTemp > outsideTemp)
+			currentTemp--;
+		System.out.println(currentTemp);
+		return currentTemp;
 	}
+
+
 	
 }

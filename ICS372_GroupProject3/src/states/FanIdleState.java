@@ -62,7 +62,8 @@ public class FanIdleState extends ThermometerState implements Notifiable{
 	
 	@Override
 	public void enter() {
-		timer = new Timer(this,10);
+		timer = new Timer(this,3);
+		System.out.println("fan timer: " + timer.getTimeValue());
 		ThermometerContext.instance().showFanIdle();
 	}
 

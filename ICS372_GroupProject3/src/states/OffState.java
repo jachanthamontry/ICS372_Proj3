@@ -6,9 +6,13 @@ import events.SelectFanEvent;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
+import events.TimerTickedEvent;
+import timer.Notifiable;
+import timer.Timer;
 
-public class OffState extends ThermometerState {
+public class OffState extends ThermometerState implements Notifiable{
 	private static OffState instance;
+	private Timer timer;
 	
 	private OffState() {
 	}
@@ -17,7 +21,9 @@ public class OffState extends ThermometerState {
     public static OffState instance() {
         if (instance == null) {
             instance = new OffState();
+            
         }
+        
         return instance;
     }
 
@@ -49,18 +55,34 @@ public class OffState extends ThermometerState {
     @Override
     public void handleEvent(SettingOutsideTemperature event) {
     	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
-        ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
+        ThermometerContext.instance().showOutsideTemp(super.outsideTemperatureValue);
+		System.out.println("offstate temp: " + outsideTemperatureValue);
+        
+    }
+    
+    public void handleEvent(TimerTickedEvent event) {
+    	
+    	if(currentTemperatureValue < outsideTemperatureValue) {
+    		currentTemperatureValue = ThermometerContext.instance().temperatureIncrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	if(currentTemperatureValue > outsideTemperatureValue) {
+    		currentTemperatureValue = ThermometerContext.instance().temperatureDecrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
+ 
     }
 	
 	@Override
 	public void enter() {
-		ThermometerContext.instance().showNoDevice();
 		
+		System.out.println("get time: " + timer.getTimeValue());
+		ThermometerContext.instance().showNoDevice();
+
 	}
 
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

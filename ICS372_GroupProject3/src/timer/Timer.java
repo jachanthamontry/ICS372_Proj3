@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 
 import events.SelectFanEvent;
 import events.TimerEnds;
+import events.TimerTickedEvent;
 
 
 /**
@@ -85,8 +86,8 @@ public class Timer implements PropertyChangeListener {
             client.handleEvent(TimerEnds.instance());
             Clock.instance().removePropertyChangeListener(this);
         } 
-//            else {
-//            client.handleEvent(new TimerTickedEvent(timeValue));
-//        }
+            else {
+            client.handleEvent(new TimerTickedEvent(timeValue));
+        }
     }
 }

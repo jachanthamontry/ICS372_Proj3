@@ -96,61 +96,51 @@ public class GUIDisplay extends Application implements ThermometerDisplay {
 	@Override
 	public void showCurrentTemp(int value) {
 		currentTempLabel.setText("Current Temp " + value);
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showDesiredTemp(int value) {
 		desiredTempLabel.setText("Desired Temp " + value);
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showOutsideTemp(int value) {
 		outsideTempLabel.setText("Outside Temp " + value);
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showNoDevice() {
 		deviceLabel.setText("No Device is on");
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showFanIdle() {
 		deviceLabel.setText("Fan is idling");
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showFanOn() {
 		deviceLabel.setText("Fan is working");
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showACIdle() {
 		deviceLabel.setText("AC is idling");
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showACOn() {
 		deviceLabel.setText("AC is on");
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showHeaterIdle() {
 		deviceLabel.setText("Heater is idling");
-		System.out.println("moo");
 	}
 	
 	@Override
 	public void showHeaterOn() {
 		deviceLabel.setText("Heater is on");
-		System.out.println("moo");
 	}
 	@Override
 	public String getEntryField() {

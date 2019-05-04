@@ -10,7 +10,6 @@ import events.SettingOutsideTemperature;
 
 public class ACIdleState extends ThermometerState {
 	private static ACIdleState instance;
-	
 	private ACIdleState() {
 	}
 	
@@ -59,10 +58,14 @@ public class ACIdleState extends ThermometerState {
     public void handleEvent(SettingOutsideTemperature event) {
     	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
         ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
+        System.out.println(outsideTemperatureValue);
+        System.out.println(super.outsideTemperatureValue);
     }
 	
 	@Override
 	public void enter() {
+		System.out.println("acidle this: " + this.outsideTemperatureValue);
+		System.out.println("acidle super: " + super.outsideTemperatureValue);
 		ThermometerContext.instance().temperatureIncrease(currentTemperatureValue, outsideTemperatureValue);
 		ThermometerContext.instance().showACIdle();
 	}
