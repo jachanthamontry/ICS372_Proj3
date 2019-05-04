@@ -4,6 +4,7 @@ import events.SelectOffEvent;
 import events.SelectACEvent;
 import events.SelectFanEvent;
 import events.TemperatureLeavesThresholdEvent;
+import events.TimerTickedEvent;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
@@ -55,6 +56,30 @@ public class HeaterIdleState extends ThermometerState {
     public void handleEvent(SettingOutsideTemperature event) {
     	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
         ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
+    }
+    
+    public void handleEvent(TimerTickedEvent event) {
+    	
+    	if(currentTemperatureValue < outsideTemperatureValue) {
+    		if(currentTemperatureValue <= desiredTemperatureValue - 3) {
+    			ThermometerContext.instance().changeState(HeaterOnState.instance());
+        	}
+    		currentTemperatureValue = ThermometerContext.instance().temperatureIncrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	
+    	if(currentTemperatureValue > outsideTemperatureValue) {
+    		if(currentTemperatureValue <= desiredTemperatureValue - 3) {
+    			ThermometerContext.instance().changeState(HeaterOnState.instance());
+        	}
+    		currentTemperatureValue = ThermometerContext.instance().temperatureDecrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	
+  	
+    	System.out.println("current: " + currentTemperatureValue);
+		System.out.println("outside: " + outsideTemperatureValue);
+		System.out.println("desired: " + desiredTemperatureValue);	
+    	
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
     }
 	
 	@Override

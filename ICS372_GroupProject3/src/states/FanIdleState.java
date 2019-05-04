@@ -4,6 +4,7 @@ import events.SelectOffEvent;
 import events.SelectACEvent;
 import events.SelectHeatEvent;
 import events.TimerEnds;
+import events.TimerTickedEvent;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
@@ -12,7 +13,7 @@ import timer.Timer;
 
 public class FanIdleState extends ThermometerState implements Notifiable{
 	private static FanIdleState instance;
-	private Timer timer;
+	private int fantimer;
 	
 	private FanIdleState() {
 	}
@@ -42,6 +43,24 @@ public class FanIdleState extends ThermometerState implements Notifiable{
     public void handleEvent(TimerEnds event) {
         ThermometerContext.instance().changeState(FanOnState.instance());
     }
+    
+    public void handleEvent(TimerTickedEvent event) {
+    	fantimer++;
+    	
+    	if(fantimer == 5) {
+    		 ThermometerContext.instance().changeState(FanOnState.instance());
+    	}
+    	
+    	if(currentTemperatureValue < outsideTemperatureValue) {
+    		currentTemperatureValue = ThermometerContext.instance().temperatureIncrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	
+    	if(currentTemperatureValue > outsideTemperatureValue) {
+    		currentTemperatureValue = ThermometerContext.instance().temperatureDecrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
+    }
 
     @Override
     public void handleEvent(SettingCurrentTemperature event) {
@@ -62,15 +81,13 @@ public class FanIdleState extends ThermometerState implements Notifiable{
 	
 	@Override
 	public void enter() {
-		timer = new Timer(this,3);
-		System.out.println("fan timer: " + timer.getTimeValue());
+
 		ThermometerContext.instance().showFanIdle();
 	}
 
 	@Override
 	public void leave() {
-		timer.stop();
-		timer = null;
+		fantimer = 0;
 	}
 
 }

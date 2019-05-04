@@ -145,7 +145,7 @@ public class ThermometerContext implements Notifiable {
 	}
 	
 	public void showHeaterOn() {
-		display.showHeaterIdle();
+		display.showHeaterOn();
 	}
 	public String getEntryField() {
 		return display.getEntryField();
@@ -154,14 +154,12 @@ public class ThermometerContext implements Notifiable {
 	public int temperatureIncrease(int currentTemp, int outsideTemp) {
 		if(currentTemp < outsideTemp)
 			currentTemp++;
-		System.out.println(currentTemp);
 		return currentTemp;
 	}
 
 	public int temperatureDecrease(int currentTemp, int outsideTemp) {
 		if(currentTemp > outsideTemp)
 			currentTemp--;
-		System.out.println(currentTemp);
 		return currentTemp;
 	}
 

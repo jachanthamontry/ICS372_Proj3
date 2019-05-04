@@ -4,6 +4,7 @@ import events.SelectOffEvent;
 import events.SelectFanEvent;
 import events.SelectHeatEvent;
 import events.TemperatureLeavesThresholdEvent;
+import events.TimerTickedEvent;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
@@ -38,11 +39,26 @@ public class ACIdleState extends ThermometerState {
     
     @Override
     public void handleEvent(TemperatureLeavesThresholdEvent event) {
-		if(currentTemperatureValue > desiredTemperatureValue + 3) {
-			ThermometerContext.instance().changeState(ACOnState.instance());
-		}
+    	ThermometerContext.instance().changeState(ACOnState.instance());
     }
 
+    public void handleEvent(TimerTickedEvent event) {
+    	if(currentTemperatureValue < outsideTemperatureValue) {
+    		if(currentTemperatureValue >= desiredTemperatureValue + 3) {
+    			ThermometerContext.instance().changeState(ACOnState.instance());
+        	}
+    		
+    		currentTemperatureValue = ThermometerContext.instance().temperatureIncrease(currentTemperatureValue, outsideTemperatureValue);
+    	}
+    	
+    	if(currentTemperatureValue > outsideTemperatureValue) {
+    		currentTemperatureValue = ThermometerContext.instance().temperatureDecrease(currentTemperatureValue, outsideTemperatureValue);
+    	
+    	}
+    	
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
+    }
+    
     @Override
     public void handleEvent(SettingCurrentTemperature event) {
     	super.currentTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
@@ -64,9 +80,6 @@ public class ACIdleState extends ThermometerState {
 	
 	@Override
 	public void enter() {
-		System.out.println("acidle this: " + this.outsideTemperatureValue);
-		System.out.println("acidle super: " + super.outsideTemperatureValue);
-		ThermometerContext.instance().temperatureIncrease(currentTemperatureValue, outsideTemperatureValue);
 		ThermometerContext.instance().showACIdle();
 	}
 

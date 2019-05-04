@@ -55,9 +55,7 @@ public class OffState extends ThermometerState implements Notifiable{
     @Override
     public void handleEvent(SettingOutsideTemperature event) {
     	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
-        ThermometerContext.instance().showOutsideTemp(super.outsideTemperatureValue);
-		System.out.println("offstate temp: " + outsideTemperatureValue);
-        
+        ThermometerContext.instance().showOutsideTemp(super.outsideTemperatureValue);    
     }
     
     public void handleEvent(TimerTickedEvent event) {
@@ -73,11 +71,8 @@ public class OffState extends ThermometerState implements Notifiable{
     }
 	
 	@Override
-	public void enter() {
-		
-		System.out.println("get time: " + timer.getTimeValue());
+	public void enter() {		
 		ThermometerContext.instance().showNoDevice();
-
 	}
 
 	@Override

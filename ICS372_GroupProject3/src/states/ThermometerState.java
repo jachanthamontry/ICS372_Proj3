@@ -16,9 +16,9 @@ import timer.Timer;
 
 public abstract class ThermometerState{
 
-	protected int currentTemperatureValue = 0 ; 
-	protected int desiredTemperatureValue = 0;
-	protected int outsideTemperatureValue = 0;
+	protected static int currentTemperatureValue = 0 ; 
+	protected static int desiredTemperatureValue = 0;
+	protected static int outsideTemperatureValue = 0;
 	protected Timer temperatureTimer;
  
     public abstract void enter();

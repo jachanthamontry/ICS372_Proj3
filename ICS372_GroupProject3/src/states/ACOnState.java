@@ -4,6 +4,7 @@ import events.SelectOffEvent;
 import events.SelectFanEvent;
 import events.SelectHeatEvent;
 import events.TemperatureHitsDesiredTemperatureEvent;
+import events.TimerTickedEvent;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
@@ -36,6 +37,17 @@ public class ACOnState extends ThermometerState {
     	if(currentTemperatureValue == desiredTemperatureValue) {
     		ThermometerContext.instance().changeState(ACIdleState.instance());
     	}
+    }
+    public void handleEvent(TimerTickedEvent event) {
+    	
+    	if(currentTemperatureValue > desiredTemperatureValue) {
+    		currentTemperatureValue = ThermometerContext.instance().temperatureDecrease(currentTemperatureValue, desiredTemperatureValue);
+    		if(currentTemperatureValue == desiredTemperatureValue ) {
+    			ThermometerContext.instance().changeState(ACIdleState.instance());
+        	}
+    	}
+    	
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
     }
     
     @Override
