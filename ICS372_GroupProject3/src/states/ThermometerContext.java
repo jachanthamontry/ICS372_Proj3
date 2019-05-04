@@ -141,5 +141,17 @@ public class ThermometerContext {
 	public String getEntryField() {
 		return display.getEntryField();
 	}
+
+	public void temperatureIncrease(int currentTemp, int outsideTemp) {
+		while(currentTemp < outsideTemp) {
+			currentTemp++;
+			display.showCurrentTemp(currentTemp);
+			System.out.println(currentTemp);
+		}
+	}
+
+	public void temperatureDecrease(int currentTemp, int desiredTemp, int outsideTemp) {
+		
+	}
 	
 }

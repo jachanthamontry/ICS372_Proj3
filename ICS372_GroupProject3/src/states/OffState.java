@@ -9,7 +9,6 @@ import events.SettingOutsideTemperature;
 
 public class OffState extends ThermometerState {
 	private static OffState instance;
-	private int temperatureValue;
 	
 	private OffState() {
 	}
@@ -38,18 +37,19 @@ public class OffState extends ThermometerState {
 
     @Override
     public void handleEvent(SettingCurrentTemperature event) {
-    	
-    	temperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
-    	ThermometerContext.instance().showCurrentTemp(temperatureValue);
+    	super.currentTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
     }
     @Override
     public void handleEvent(SettingDesiredTemperature event) {
-        ThermometerContext.instance().changeState(HeaterIdleState.instance());
+    	super.desiredTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showDesiredTemp(desiredTemperatureValue);
     }
-    
+
     @Override
     public void handleEvent(SettingOutsideTemperature event) {
-        ThermometerContext.instance().changeState(FanIdleState.instance());
+    	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
     }
 	
 	@Override

@@ -40,6 +40,23 @@ public class HeaterIdleState extends ThermometerState {
         ThermometerContext.instance().changeState(HeaterOnState.instance());
     }
 
+    @Override
+    public void handleEvent(SettingCurrentTemperature event) {
+    	super.currentTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
+    }
+    @Override
+    public void handleEvent(SettingDesiredTemperature event) {
+    	super.desiredTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showDesiredTemp(desiredTemperatureValue);
+    }
+
+    @Override
+    public void handleEvent(SettingOutsideTemperature event) {
+    	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
+    }
+	
 	@Override
 	public void enter() {
 		ThermometerContext.instance().showHeaterIdle();

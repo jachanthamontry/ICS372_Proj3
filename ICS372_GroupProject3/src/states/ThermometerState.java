@@ -10,18 +10,18 @@ import events.TimerEnds;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
+import timer.Timer;
 
 
 public abstract class ThermometerState{
 
-    /**
-     * Initializes the state
-     */
+	protected int currentTemperatureValue;
+	protected int desiredTemperatureValue;
+	protected int outsideTemperatureValue;
+	protected Timer temperatureTimer;
+ 
     public abstract void enter();
 
-    /**
-     * Performs any necessary clean up while leaving the state
-     */
     public abstract void leave();
 
     public void handleEvent(SelectOffEvent event) {
@@ -63,4 +63,5 @@ public abstract class ThermometerState{
     public void handleEvent(SettingOutsideTemperature event) {
     	
     }
+    
 }

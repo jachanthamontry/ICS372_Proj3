@@ -7,9 +7,12 @@ import events.TimerEnds;
 import events.SettingCurrentTemperature;
 import events.SettingDesiredTemperature;
 import events.SettingOutsideTemperature;
+import timer.Notifiable;
+import timer.Timer;
 
-public class FanOnState extends ThermometerState {
+public class FanOnState extends ThermometerState implements Notifiable {
 	private static FanOnState instance;
+	Timer timer;
 	
 	private FanOnState() {
 	}
@@ -40,19 +43,34 @@ public class FanOnState extends ThermometerState {
         ThermometerContext.instance().changeState(FanIdleState.instance());
     }
 
+    @Override
+    public void handleEvent(SettingCurrentTemperature event) {
+    	super.currentTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
+    }
+    @Override
+    public void handleEvent(SettingDesiredTemperature event) {
+    	super.desiredTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showDesiredTemp(desiredTemperatureValue);
+    }
 
+    @Override
+    public void handleEvent(SettingOutsideTemperature event) {
+    	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
+    }
+	
 	@Override
 	public void enter() {
+		timer = new Timer(this,10);
 		ThermometerContext.instance().showFanOn();
 		
 	}
 
-
 	@Override
 	public void leave() {
-		// TODO Auto-generated method stub
-		
+		timer.stop();
+		timer = null;
 	}
-
 
 }

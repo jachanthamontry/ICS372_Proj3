@@ -33,12 +33,31 @@ public class ACOnState extends ThermometerState {
     
     @Override
     public void handleEvent(TemperatureHitsDesiredTemperatureEvent event) {
-        ThermometerContext.instance().changeState(ACIdleState.instance());
+    	if(currentTemperatureValue == desiredTemperatureValue) {
+    		ThermometerContext.instance().changeState(ACIdleState.instance());
+    	}
     }
     
     @Override
     public void handleEvent(SelectOffEvent event) {
         ThermometerContext.instance().changeState(OffState.instance());
+    }
+
+    @Override
+    public void handleEvent(SettingCurrentTemperature event) {
+    	super.currentTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+    	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
+    }
+    @Override
+    public void handleEvent(SettingDesiredTemperature event) {
+    	super.desiredTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showDesiredTemp(desiredTemperatureValue);
+    }
+
+    @Override
+    public void handleEvent(SettingOutsideTemperature event) {
+    	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
+        ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
     }
 	
 	@Override
