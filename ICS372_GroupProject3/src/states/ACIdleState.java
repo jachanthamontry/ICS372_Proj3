@@ -74,8 +74,6 @@ public class ACIdleState extends ThermometerState {
     public void handleEvent(SettingOutsideTemperature event) {
     	super.outsideTemperatureValue = Integer.parseInt(ThermometerContext.instance().getEntryField());
         ThermometerContext.instance().showOutsideTemp(outsideTemperatureValue);
-        System.out.println(outsideTemperatureValue);
-        System.out.println(super.outsideTemperatureValue);
     }
 	
 	@Override

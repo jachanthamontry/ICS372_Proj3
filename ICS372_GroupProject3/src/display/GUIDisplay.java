@@ -23,7 +23,6 @@ import buttons.NoDeviceButton;
 
 public class GUIDisplay extends Application implements ThermometerDisplay {
 
-	private int currentTemp = 0;
 	private GUIButton heaterButton;
 	private GUIButton acButton;
 	private GUIButton fanButton;

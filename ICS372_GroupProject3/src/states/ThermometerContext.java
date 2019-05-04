@@ -27,7 +27,8 @@ public class ThermometerContext implements Notifiable {
     private ThermometerContext() {
         instance = this;
         currentState = OffState.instance();
-        timer = new Timer(this,100);
+        //the average life expectency of a heater is 15 years. 
+        timer = new Timer(this,7884000);
     }
     
     /**

@@ -22,8 +22,7 @@ public class OffState extends ThermometerState implements Notifiable{
         if (instance == null) {
             instance = new OffState();
             
-        }
-        
+        }       
         return instance;
     }
 
@@ -77,8 +76,6 @@ public class OffState extends ThermometerState implements Notifiable{
 
 	@Override
 	public void leave() {
-		
-		
 	}
 
 }

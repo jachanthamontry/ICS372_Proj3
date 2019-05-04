@@ -74,11 +74,6 @@ public class HeaterIdleState extends ThermometerState {
     		currentTemperatureValue = ThermometerContext.instance().temperatureDecrease(currentTemperatureValue, outsideTemperatureValue);
     	}
     	
-  	
-    	System.out.println("current: " + currentTemperatureValue);
-		System.out.println("outside: " + outsideTemperatureValue);
-		System.out.println("desired: " + desiredTemperatureValue);	
-    	
     	ThermometerContext.instance().showCurrentTemp(currentTemperatureValue);
     }
 	
